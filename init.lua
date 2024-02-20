@@ -53,8 +53,9 @@ require 'lazy-plugins'
 -- [[ Setting options ]]
 require 'options'
 
--- [[ Basic Keymaps ]]
+-- [[ Basic Keymaps & Setup]]
 require 'keymaps'
+require 'setup'
 
 -- [[ Configure Telescope ]]
 -- (fuzzy finder)
@@ -71,6 +72,12 @@ require 'lsp-setup'
 -- [[ Configure nvim-cmp ]]
 -- (completion)
 require 'cmp-setup'
+
+-- [[ Harpoon ]]
+require 'harpoon'
+
+-- [[Noice]]
+-- require 'noice-setup'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

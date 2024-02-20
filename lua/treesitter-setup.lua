@@ -59,6 +59,7 @@ vim.defer_fn(function()
           ['[]'] = '@class.outer',
         },
       },
+      --[[
       swap = {
         enable = true,
         swap_next = {
@@ -67,7 +68,7 @@ vim.defer_fn(function()
         swap_previous = {
           ['<leader>A'] = '@parameter.inner',
         },
-      },
+      },--]]
     },
   }
 end, 0)

@@ -1,11 +1,5 @@
 -- [[ Configure plugins ]]
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -26,7 +20,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -62,7 +56,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -137,8 +131,7 @@ require('lazy').setup({
       end,
     },
   },
-
-  {
+  --[[{ OLD THEME.
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
@@ -150,8 +143,38 @@ require('lazy').setup({
       }
       require('onedark').load()
     end,
+  },--]]
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    lazy = false,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        background = {     -- :h background
+          dark = "mocha",
+        },
+        transparent_background = false, -- disables setting the background color.
+        show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
+        term_colors = false,            -- sets terminal colors (e.g. `g:terminal_color_0`)
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          notify = false,
+          mini = {
+            enabled = true,
+            indentscope_color = "",
+          },
+          -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+        },
+      })
+      -- setup must be called before loading
+      vim.cmd.colorscheme "catppuccin"
+    end
   },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -208,19 +231,33 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
+  {
+    "folke/noice.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    opts = {
+      routes = {
+        {
+          filter = { event = "notify", find = "No information available" },
+          opts = { skip = true },
+        },
+      },
+      presets = {
+        lsp_doc_border = true,
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- vim: ts=2 sts=2 sw=2 et
