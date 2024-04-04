@@ -44,5 +44,4 @@ vim.api.nvim_set_keymap('v', '<Down>', '<Nop>', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('v', '<Left>', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Right>', '<Nop>', { noremap = true, silent = true })
 
-
--- vim: ts=2 sts=2 sw=2 et
+vim.api.nvim_set_keymap('i', 'jj', '<Esc>', {})
